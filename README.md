@@ -1,2 +1,2 @@
-# flask-celery-app
-Simple API+Worker service using Flask, Celery and SQLAlchemy
+# flask-app
+Simple API service using Flask and SQLAlchemy
