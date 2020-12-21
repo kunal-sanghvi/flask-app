@@ -41,14 +41,14 @@ def require_authenticate():
 
 
 def basic_auth(func):
-    def wrapper(rest_handler, *args, **kwargs):
+    def wrapper(*args, **kwargs):
         auth = request.authorization
         if auth:
             if auth.username == API_USER_NAME and auth.password == API_USER_PASS:
-                rest_handler.log = LoggingMiddleware(logger=basic_logger,
-                                                     api_method=request.method,
-                                                     api_path=request.path)
-                return func(rest_handler, *args, **kwargs)
+                log = LoggingMiddleware(logger=basic_logger,
+                                        api_method=request.method,
+                                        api_path=request.path)
+                return func(log, *args, **kwargs)
         require_authenticate()
     wrapper.__name__ = func.__name__
     wrapper.__doc__ = func.__doc__
